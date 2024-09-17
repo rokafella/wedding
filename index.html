@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to March 28, 2025</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+        }
+        .bg-image {
+            background-image: url('background.jpeg');
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: brightness(0.6);
+        }
+        #countdown {
+            position: fixed;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+        }
+        .time-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+        }
+        .time-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        .time-label {
+            font-size: 0.9rem;
+            color: #bbb;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+        @media (max-width: 768px) {
+            .time-value {
+                font-size: 2rem;
+            }
+            .time-label {
+                font-size: 0.7rem;
+            }
+            #countdown {
+                bottom: 20px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-image"></div>
+    <div id="countdown">
+        <div class="time-section">
+            <span id="days" class="time-value">00</span>
+            <span class="time-label">Days</span>
+        </div>
+        <div class="time-section">
+            <span id="hours" class="time-value">00</span>
+            <span class="time-label">Hours</span>
+        </div>
+        <div class="time-section">
+            <span id="minutes" class="time-value">00</span>
+            <span class="time-label">Minutes</span>
+        </div>
+        <div class="time-section">
+            <span id="seconds" class="time-value">00</span>
+            <span class="time-label">Seconds</span>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const countdownDate = new Date("March 28, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days.toString().padStart(2, '0');
+            document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "<div class='time-value'>EXPIRED</div>";
+            }
+        }
+
+        updateCountdown();
+        const x = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
