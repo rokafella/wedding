@@ -4,23 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RokaAnu13Saat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body, html {
             height: 100%;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #000;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+        .section {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            overflow: hidden;
         }
         .bg-image {
             background-image: url('images/background.JPEG');
             height: 100%;
+            width: 100%;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
             filter: brightness(0.6);
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #000; /* Fallback color */
+        }
+        #intro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 100vh;
+        }
+        #welcome {
+            font-family: 'Great Vibes', cursive;
+            font-size: 6rem;
+            color: #fff;
+            text-align: center;
+            letter-spacing: 5px;
+            animation: fadeIn 2s ease-in-out;
+            z-index: 1;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            background-color: rgba(0,0,0,0.3);
+            padding: 20px 40px;
+            border-radius: 10px;
+        }
+        #scroll-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            cursor: pointer;
+            z-index: 1000;
+            transition: left 0.5s ease-out;
+        }
+        #plane-icon {
+            width: 40px;
+            height: 40px;
+            fill: #fff;
+            transform: rotate(90deg);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes flyIn {
+            from { transform: translateX(-100vw); }
+            to { transform: translateX(0); }
         }
         #countdown-container {
-            position: fixed;
+            position: absolute;
             bottom: 40px;
             left: 0;
             right: 0;
@@ -61,6 +118,10 @@
             margin-top: 5px;
         }
         @media (max-width: 768px) {
+            #welcome {
+                font-size: 4rem;
+                padding: 15px 30px;
+            }
             #coming-soon {
                 font-size: 1.5rem;
             }
@@ -87,25 +148,36 @@
   gtag('config', 'G-Y7RVVNMP8D');
 </script>
 <body>
-    <div class="bg-image"></div>
-    <div id="countdown-container">
-        <div id="coming-soon">More details coming soon</div>
-        <div id="countdown">
-            <div class="time-section">
-                <span id="days" class="time-value">00</span>
-                <span class="time-label">Days</span>
-            </div>
-            <div class="time-section">
-                <span id="hours" class="time-value">00</span>
-                <span class="time-label">Hours</span>
-            </div>
-            <div class="time-section">
-                <span id="minutes" class="time-value">00</span>
-                <span class="time-label">Minutes</span>
-            </div>
-            <div class="time-section">
-                <span id="seconds" class="time-value">00</span>
-                <span class="time-label">Seconds</span>
+    <div id="intro" class="section">
+        <div class="bg-image"></div>
+        <h1 id="welcome">Rohit & Anusha</h1>
+        <div id="scroll-down">
+            <svg id="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+            </svg>
+        </div>
+    </div>
+    <div id="countdown-section" class="section">
+        <div class="bg-image"></div>
+        <div id="countdown-container">
+            <div id="coming-soon">More details coming soon</div>
+            <div id="countdown">
+                <div class="time-section">
+                    <span id="days" class="time-value">00</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-section">
+                    <span id="hours" class="time-value">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-section">
+                    <span id="minutes" class="time-value">00</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="time-section">
+                    <span id="seconds" class="time-value">00</span>
+                    <span class="time-label">Seconds</span>
+                </div>
             </div>
         </div>
     </div>
@@ -134,6 +206,60 @@
 
         updateCountdown();
         const x = setInterval(updateCountdown, 1000);
+
+        const scrollDown = document.getElementById('scroll-down');
+        const introSection = document.getElementById('intro');
+        const countdownSection = document.getElementById('countdown-section');
+
+        // Fly in animation on page load
+        scrollDown.style.animation = 'flyIn 2s ease-out forwards';
+
+        let scrollPosition = 0;
+        const introHeight = introSection.offsetHeight;
+
+        function updatePlanePosition(progress) {
+            // Move the plane to the right based on progress
+            const leftPosition = 50 + progress * 50; // 50% to 100%
+            scrollDown.style.left = `${leftPosition}%`;
+
+            // Adjust opacity
+            scrollDown.style.opacity = 1 - progress;
+
+            if (progress >= 1) {
+                setTimeout(() => {
+                    countdownSection.scrollIntoView({ behavior: 'smooth' });
+                }, 10);
+            }
+        }
+
+        window.addEventListener('wheel', function(event) {
+            scrollPosition += event.deltaY;
+            scrollPosition = Math.max(0, Math.min(scrollPosition, introHeight));
+            const progress = scrollPosition / introHeight;
+            requestAnimationFrame(() => updatePlanePosition(progress));
+        });
+
+        scrollDown.addEventListener('click', function() {
+            const duration = 1000; // Animation duration in milliseconds
+            const start = performance.now();
+            const startScrollPosition = scrollPosition;
+
+            function animatePlane(currentTime) {
+                const elapsedTime = currentTime - start;
+                const progress = Math.min(elapsedTime / duration, 1);
+                scrollPosition = startScrollPosition + (introHeight - startScrollPosition) * progress;
+                updatePlanePosition(progress);
+
+                if (progress < 1) {
+                    requestAnimationFrame(animatePlane);
+                }
+            }
+
+            requestAnimationFrame(animatePlane);
+        });
+
+        // Initial position update
+        updatePlanePosition(0);
     </script>
 </body>
 </html>
