@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RokaAnu13Saat</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body, html {
             height: 100%;
             margin: 0;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Roboto', sans-serif;
             overflow-x: hidden;
         }
         .section {
@@ -39,11 +39,11 @@
             height: 100vh;
         }
         #welcome {
-            font-family: 'Great Vibes', cursive;
+            font-family: 'Alex Brush', cursive;
             font-size: 6rem;
             color: #fff;
             text-align: center;
-            letter-spacing: 5px;
+            letter-spacing: 3px;
             animation: fadeIn 2s ease-in-out;
             z-index: 1;
             position: relative;
@@ -78,7 +78,7 @@
         }
         #countdown-container {
             position: absolute;
-            bottom: 40px;
+            bottom: 0;
             left: 0;
             right: 0;
             display: flex;
@@ -89,24 +89,26 @@
             box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
         }
         #coming-soon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #fff;
             margin-bottom: 15px;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
+            font-family: 'Alex Brush', cursive;
         }
         #countdown {
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-wrap: wrap;
         }
         .time-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 0 15px;
+            margin: 10px 15px;
         }
         .time-value {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #fff;
         }
@@ -132,8 +134,10 @@
                 font-size: 0.7rem;
             }
             #countdown-container {
-                bottom: 20px;
-                padding: 15px;
+                padding: 15px 10px;
+            }
+            .time-section {
+                margin: 5px 10px;
             }
         }
     </style>
@@ -260,6 +264,32 @@
 
         // Initial position update
         updatePlanePosition(0);
+
+        // Touch event handling for mobile devices
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        window.addEventListener('touchstart', function(event) {
+            touchStartY = event.touches[0].clientY;
+        }, false);
+
+        window.addEventListener('touchmove', function(event) {
+            touchEndY = event.touches[0].clientY;
+            const touchDelta = touchStartY - touchEndY;
+            scrollPosition += touchDelta;
+            scrollPosition = Math.max(0, Math.min(scrollPosition, introHeight));
+            const progress = scrollPosition / introHeight;
+            requestAnimationFrame(() => updatePlanePosition(progress));
+        }, false);
+
+        window.addEventListener('touchend', function(event) {
+            if (Math.abs(touchStartY - touchEndY) > 50) {
+                if (touchEndY < touchStartY) {
+                    // Swipe up
+                    countdownSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }, false);
     </script>
 </body>
 </html>
