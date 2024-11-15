@@ -20,6 +20,30 @@
             position: relative;
             overflow: hidden;
         }
+        #video-background {
+            filter: brightness(0.5);
+            backdrop-filter: blur(3px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);  /* Lighter background for glass effect */
+            backdrop-filter: blur(3px);  /* Increased blur */
+            -webkit-backdrop-filter: blur(3px);  /* For Safari support */
+            z-index: 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+            border: 1px solid rgba(255, 255, 255, 0.3);  /* Subtle border for glass effect */
+        }
         .bg-image {
             background-image: url('images/background.JPEG');
             height: 100%;
@@ -180,7 +204,11 @@
 </script>
 <body>
     <div id="intro" class="section">
-        <div class="bg-image"></div>
+        <video id="video-background" autoplay loop muted playsinline>
+            <source src="images/video.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
         <h1 id="welcome">Anusha & Rohit</h1>
         <div class="scroll-down" data-target="second-page">
             <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
