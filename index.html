@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RokaAnu13Saat</title>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body, html {
             height: 100%;
             margin: 0;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
             overflow-x: hidden;
         }
         .section {
@@ -39,11 +40,12 @@
             height: 100vh;
         }
         #welcome {
-            font-family: 'Alex Brush', cursive;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
             font-size: 6rem;
             color: #fff;
             text-align: center;
-            letter-spacing: 3px;
+            letter-spacing: 5px;
             animation: fadeIn 2s ease-in-out;
             z-index: 1;
             position: relative;
@@ -54,7 +56,7 @@
         }
         #scroll-down {
             position: absolute;
-            bottom: 20px;
+            bottom: 60px;
             left: 50%;
             transform: translateX(-50%);
             color: #fff;
@@ -78,7 +80,7 @@
         }
         #countdown-container {
             position: absolute;
-            bottom: 0;
+            bottom: 80px;
             left: 0;
             right: 0;
             display: flex;
@@ -89,31 +91,33 @@
             box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
         }
         #coming-soon {
-            font-size: 1.8rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 2.5rem;
             color: #fff;
             margin-bottom: 15px;
-            letter-spacing: 2px;
-            font-family: 'Alex Brush', cursive;
+            letter-spacing: 3px;
         }
         #countdown {
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
         }
         .time-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 10px 15px;
+            margin: 0 15px;
         }
         .time-value {
-            font-size: 2.5rem;
-            font-weight: bold;
+            font-size: 3rem;
+            font-weight: 400;
             color: #fff;
         }
         .time-label {
-            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 1.2rem;
             color: #bbb;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -125,19 +129,17 @@
                 padding: 15px 30px;
             }
             #coming-soon {
-                font-size: 1.5rem;
+                font-size: 2rem;
             }
             .time-value {
                 font-size: 2rem;
             }
             .time-label {
-                font-size: 0.7rem;
+                font-size: 1rem;
             }
             #countdown-container {
-                padding: 15px 10px;
-            }
-            .time-section {
-                margin: 5px 10px;
+                bottom: 60px;
+                padding: 15px;
             }
         }
     </style>
@@ -154,7 +156,7 @@
 <body>
     <div id="intro" class="section">
         <div class="bg-image"></div>
-        <h1 id="welcome">Rohit & Anusha</h1>
+        <h1 id="welcome">Anusha & Rohit</h1>
         <div id="scroll-down">
             <svg id="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
@@ -264,32 +266,6 @@
 
         // Initial position update
         updatePlanePosition(0);
-
-        // Touch event handling for mobile devices
-        let touchStartY = 0;
-        let touchEndY = 0;
-
-        window.addEventListener('touchstart', function(event) {
-            touchStartY = event.touches[0].clientY;
-        }, false);
-
-        window.addEventListener('touchmove', function(event) {
-            touchEndY = event.touches[0].clientY;
-            const touchDelta = touchStartY - touchEndY;
-            scrollPosition += touchDelta;
-            scrollPosition = Math.max(0, Math.min(scrollPosition, introHeight));
-            const progress = scrollPosition / introHeight;
-            requestAnimationFrame(() => updatePlanePosition(progress));
-        }, false);
-
-        window.addEventListener('touchend', function(event) {
-            if (Math.abs(touchStartY - touchEndY) > 50) {
-                if (touchEndY < touchStartY) {
-                    // Swipe up
-                    countdownSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        }, false);
     </script>
 </body>
 </html>
