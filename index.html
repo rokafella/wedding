@@ -33,14 +33,14 @@
             left: 0;
             background-color: #000; /* Fallback color */
         }
-        #intro, #second-page, #countdown-section {
+        #intro, #second-page, #venue-page, #countdown-section {
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             height: 100vh;
         }
-        #welcome, #intro-message {
+        #welcome, #intro-message, #venue-info {
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
             font-size: 6vw;
@@ -55,7 +55,7 @@
             padding: 20px 40px;
             border-radius: 10px;
         }
-        #intro-message {
+        #intro-message, #venue-info {
             font-size: 1.8vw;
             max-width: 80%;
             line-height: 1.8;
@@ -67,8 +67,7 @@
             letter-spacing: 0.5px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
-
-        #intro-message strong {
+        #intro-message strong, #venue-info strong {
             font-weight: 700;
             color: #ffd700;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
@@ -142,16 +141,32 @@
             letter-spacing: 2px;
             margin-top: 5px;
         }
+        .map-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 10px;
+            background-color: #ffd700;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1vw;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+        .map-link:hover {
+            background-color: #fff;
+            color: #000;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7RVVNMP8D"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Y7RVVNMP8D');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y7RVVNMP8D');
 </script>
 <body>
     <div id="intro" class="section">
@@ -163,6 +178,7 @@
             </svg>
         </div>
     </div>
+
     <div id="second-page" class="section">
         <div class="bg-image"></div>
         <p id="intro-message">
@@ -171,16 +187,32 @@
             Get ready to <strong>dance</strong>, <strong>sing</strong>, create plenty of <strong>shor-sharaba</strong> and make memories that will last a lifetime.<br><br>
             <strong>Date: 28th & 29th March 2025</strong>
         </p>
+        <div class="scroll-down" data-target="venue-page">
+            <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+            </svg>
+        </div>
+    </div>
+
+    <div id="venue-page" class="section">
+        <div class="bg-image"></div>
+        <p id="venue-info">
+            Join us for our celebration at the <strong>La Cabana Beach & Spa</strong><br><br>
+            Set on the beautiful shores of <strong>Goa</strong>, La Cabana Beach & Spa is the perfect place to celebrate our wedding. With golden <strong>sands, vibrant sunsets, and lively music</strong>, the place will be an unforgettable backdrop for the celebration.<br><br>
+            <strong>Address:</strong><br>La Cabana Beach & Spa<br>Ashvem Beach, Ashvem Wada<br> Mandrem, Goa 403527<br>India<br><br>
+            <a href="https://maps.app.goo.gl/XHLEVJjhzcsxgZ679" target="_blank" class="map-link">View on Google Maps</a>
+        </p>
         <div class="scroll-down" data-target="countdown-section">
             <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
             </svg>
         </div>
     </div>
+
     <div id="countdown-section" class="section">
         <div class="bg-image"></div>
         <div id="countdown-container">
-            <div id="coming-soon">More details coming soon</div>
+            <div id="coming-soon">Can't wait to see you at the wedding in</div>
             <div id="countdown">
                 <div class="time-section">
                     <span id="days" class="time-value">00</span>
@@ -289,8 +321,8 @@
             // Initial position update
             updatePlanePosition(0);
 
-            // Animate second plane when scrolled into view
-            if (index === 1) {
+            // Animate planes when scrolled into view
+            if (index > 0) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
