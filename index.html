@@ -56,8 +56,22 @@
             border-radius: 10px;
         }
         #intro-message {
-            font-size: 2vw;
+            font-size: 1.8vw;
             max-width: 80%;
+            line-height: 1.8;
+            background-color: rgba(0,0,0,0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        #intro-message strong {
+            font-weight: 700;
+            color: #ffd700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         .scroll-down {
             position: absolute;
@@ -151,7 +165,12 @@
     </div>
     <div id="second-page" class="section">
         <div class="bg-image"></div>
-        <p id="intro-message">We warmly invite you to our wedding! <br> <br> From our filmi pehli mulaqat in London to the stunning shores of Goa, it’s time for love, laughter, and loads of dhamaal. Get ready to dance, sing, create plenty of shor-sharaba and make memories that will last a lifetime. <br> <br> Date: 28th & 29th March 2025</p>
+        <p id="intro-message">
+            We warmly invite you to our wedding!<br><br>
+            From our <strong>filmi pehli mulaqat</strong> in London to the <strong>stunning shores of Goa</strong>, it's time for love, laughter, and loads of dhamaal.<br><br>
+            Get ready to <strong>dance</strong>, <strong>sing</strong>, create plenty of <strong>shor-sharaba</strong> and make memories that will last a lifetime.<br><br>
+            <strong>Date: 28th & 29th March 2025</strong>
+        </p>
         <div class="scroll-down" data-target="countdown-section">
             <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
