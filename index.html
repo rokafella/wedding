@@ -19,6 +19,15 @@
             width: 100vw;
             position: relative;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         #video-background {
             filter: brightness(0.3);
@@ -37,12 +46,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.1);  /* Lighter background for glass effect */
-            backdrop-filter: blur(3px);  /* Increased blur */
-            -webkit-backdrop-filter: blur(3px);  /* For Safari support */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
             z-index: 0;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
-            border: 1px solid rgba(255, 255, 255, 0.3);  /* Subtle border for glass effect */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         .bg-image {
             background-image: url('images/background.JPEG');
@@ -55,16 +64,16 @@
             position: absolute;
             top: 0;
             left: 0;
-            background-color: #000; /* Fallback color */
+            background-color: #000;
         }
-        #intro, #second-page, #venue-page, #countdown-section {
+        #intro, #second-page, #venue-page, #rsvp-page, #countdown-section {
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             height: 100vh;
         }
-        #welcome, #intro-message, #venue-info {
+        #welcome, #intro-message, #venue-info, #rsvp-info {
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
             font-size: 6vmin;
@@ -79,7 +88,7 @@
             padding: 20px 40px;
             border-radius: 10px;
         }
-        #intro-message, #venue-info {
+        #intro-message, #venue-info, #rsvp-info {
             font-size: 2vmin;
             max-width: 80%;
             line-height: 1.5;
@@ -91,21 +100,20 @@
             letter-spacing: 0.5px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
-        #intro-message strong, #venue-info strong {
+        #intro-message strong, #venue-info strong, #rsvp-info strong {
             font-weight: 700;
             color: #ffd700;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         .scroll-down {
             position: absolute;
-            bottom: 20%;
             left: 50%;
+            bottom: -10vmin;
             transform: translateX(-50%) rotate(90deg);
             color: #fff;
             cursor: pointer;
             z-index: 1000;
             transition: all 0.3s ease;
-            opacity: 0;
         }
         .plane-icon {
             width: 4vmin;
@@ -175,7 +183,7 @@
             letter-spacing: 2px;
             margin-top: 5px;
         }
-        .map-link {
+        .map-link, .rsvp-link {
             display: inline-block;
             margin-top: 10px;
             padding: 10px 10px;
@@ -187,10 +195,18 @@
             font-weight: 400;
             transition: all 0.3s ease;
         }
-        .map-link:hover {
+        .map-link:hover, .rsvp-link:hover {
             background-color: #fff;
             color: #000;
             transform: scale(1.05);
+        }
+        #qr-code {
+            width: 20vmin;
+            height: 20vmin;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -209,41 +225,68 @@
             Your browser does not support the video tag.
         </video>
         <div class="video-overlay"></div>
-        <h1 id="welcome">Anusha & Rohit</h1>
-        <div class="scroll-down" data-target="second-page">
-            <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-            </svg>
+        <div class="content-wrapper">
+            <h1 id="welcome">Anusha & Rohit</h1>
+            <div class="scroll-down" data-target="second-page">
+                <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                </svg>
+            </div>
         </div>
     </div>
 
     <div id="second-page" class="section">
         <div class="bg-image"></div>
-        <p id="intro-message">
-            We warmly invite you to our wedding!<br><br>
-            From our <strong>filmi pehli mulaqat</strong> in London to the <strong>stunning shores of Goa</strong>, it's time for love, laughter, and loads of dhamaal.<br><br>
-            Get ready to <strong>dance</strong>, <strong>sing</strong>, create plenty of <strong>shor-sharaba</strong> and make memories that will last a lifetime.<br><br>
-            <strong>Date: 28th & 29th March 2025</strong>
-        </p>
-        <div class="scroll-down" data-target="venue-page">
-            <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-            </svg>
+        <div class="content-wrapper">
+            <p id="intro-message">
+                We warmly invite you to our wedding!<br><br>
+                From our <strong>filmi pehli mulaqat</strong> in London to the <strong>stunning shores of Goa</strong>, it's time for love, laughter, and loads of dhamaal.<br><br>
+                Get ready to <strong>dance</strong>, <strong>sing</strong>, create plenty of <strong>shor-sharaba</strong> and make memories that will last a lifetime.<br><br>
+                <strong>Date: 28th & 29th March 2025</strong>
+            </p>
+            <div class="scroll-down" data-target="venue-page">
+                <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                </svg>
+            </div>
         </div>
     </div>
 
     <div id="venue-page" class="section">
         <div class="bg-image"></div>
-        <p id="venue-info">
-            Join us for our celebration at the <strong>La Cabana Beach & Spa</strong><br><br>
-            Set on the beautiful shores of <strong>Goa</strong>, La Cabana Beach & Spa is the perfect place to celebrate our wedding. With golden <strong>sands, vibrant sunsets, and lively music</strong>, the place will be an unforgettable backdrop for the celebration.<br><br>
-            <strong>Address:</strong><br>La Cabana Beach & Spa<br>Ashvem Beach, Ashvem Wada<br> Mandrem, Goa 403527<br>India<br><br>
-            <a href="https://maps.app.goo.gl/XHLEVJjhzcsxgZ679" target="_blank" class="map-link">View on Google Maps</a>
-        </p>
-        <div class="scroll-down" data-target="countdown-section">
-            <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-            </svg>
+        <div class="content-wrapper">
+            <p id="venue-info">
+                Join us for our celebration at the <strong>La Cabana Beach & Spa</strong><br><br>
+                Set on the beautiful shores of <strong>Goa</strong>, La Cabana Beach & Spa is the perfect place to celebrate our wedding. With golden <strong>sands, vibrant sunsets, and lively music</strong>, the place will be an unforgettable backdrop for the celebration.<br><br>
+                <strong>Address:</strong><br>La Cabana Beach & Spa<br>Ashvem Beach, Ashvem Wada<br> Mandrem, Goa 403527<br>India<br><br>
+                <a href="https://maps.app.goo.gl/XHLEVJjhzcsxgZ679" target="_blank" class="map-link">View on Google Maps</a>
+            </p>
+            <div class="scroll-down" data-target="rsvp-page">
+                <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div id="rsvp-page" class="section">
+        <div class="bg-image"></div>
+        <div class="content-wrapper">
+            <div id="rsvp-info">
+                <h2>RSVP</h2>
+                <p>We can't wait to celebrate with you! Please let us know if you'll be joining us by <strong>31st January 2025</strong>.</p>
+                <div id="qr-code">
+                    <!-- Add your QR code image here -->
+                    <img src="images/QR.png" alt="RSVP QR Code" style="width: 100%; height: 100%;">
+                </div>
+                <p>Scan the QR code or click the button below to RSVP:</p>
+                <a href="https://planner.meragi.studio/wedding/entqf4?p=rsvp" target="_blank" class="rsvp-link">RSVP Now</a>
+            </div>
+            <div class="scroll-down" data-target="countdown-section">
+                <svg class="plane-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                </svg>
+            </div>
         </div>
     </div>
 
