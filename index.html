@@ -200,6 +200,11 @@
             color: #000;
             transform: scale(1.05);
         }
+        @media (pointer: coarse) {
+          .map-link:hover, .hotel-link:hover, .rsvp-link:hover {
+            all: revert-layer;
+          }
+        }
         .hotel-link {
             margin-top: 0px;
             padding: 5px 5px;
